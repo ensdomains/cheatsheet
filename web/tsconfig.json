@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "esnext", // Compile to a version of ECMAScript that supports ES modules
+        "module": "esnext", // Use ES modules
+        "strict": true, // Enable all strict type-checking options
+        "jsx": "preserve", // Preserve JSX to be transformed by another process (e.g., Babel)
+        "moduleResolution": "node", // Module resolution strategy
+        "skipLibCheck": true, // Skip type checking of all declaration files (*.d.ts)
+        "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file.
+        "esModuleInterop": true, // Enables emit interoperability between CommonJS and ES Modules
+        "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
+        "sourceMap": true, // Generate source maps
+        "baseUrl": ".", // Base directory to resolve non-absolute module names
+        "paths": {
+            // Specify paths for aliases
+            "$lib/*": ["src/lib/*"]
+        }
+    },
+    "include": ["src/**/*.ts", "src/**/*.svelte"], // Files to include in the compilation
+    "exclude": ["node_modules/*", "public/*"] // Folders to exclude from the compilation
+}

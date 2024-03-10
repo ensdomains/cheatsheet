@@ -1,0 +1,34 @@
+name: 🚚 Deploy
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Tools & Dependencies
+        uses: ./.github/actions/install
+
+      - name: Build
+        working-directory: ./app
+        run: NODE_ENV=production pnpm run build
+
+      - name: Edgeserver Upload 2
+        uses: lvkdotsh/edgeserver-action@v0.1.2-pre.4
+        with:
+          app_id: ""
+          server: https://api.edgeserver.io
+          token: ${{ secrets.SIGNAL_TOKEN }} # ${{ secrets.EDGESERVER_TOKEN }}
+          directory: app/dist
